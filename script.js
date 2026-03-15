@@ -404,3 +404,20 @@
     // ---- ensure drawer starts closed ----
     closeDrawerFunc();
 })();
+// script.js - All JavaScript functionality
+
+// 🔥 Cache check - Ensure fresh start each day
+(function() {
+    const lastVisit = localStorage.getItem('lastVisit');
+    const today = new Date().toDateString();
+    
+    if (lastVisit !== today) {
+        console.log('New day! Loading fresh data for', today);
+        localStorage.setItem('lastVisit', today);
+        // Optional: Clear any cached data
+        sessionStorage.clear();
+    }
+})();
+
+// Rest of your existing script.js code (jo maine pehle diya tha)
+// ... (poora previous script.js code yahi paste karo)
