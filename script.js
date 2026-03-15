@@ -13,6 +13,7 @@
     // ========== IMPORTANT DAYS DATASET ==========
     const importantDays = [
         // JANUARY
+{ month: 1, day: 1, event: "Happy New Year" },
         { month: 1, day: 1, event: "Global Family Day" },
         { month: 1, day: 1, event: "New Year's Day" },
         { month: 1, day: 4, event: "World Braille Day" },
@@ -62,13 +63,14 @@
         { month: 3, day: 24, event: "World Tuberculosis (TB) Day" },
         
         // APRIL
+
         { month: 4, day: 1, event: "April Fools' Day" },
         { month: 4, day: 1, event: "Odisha Foundation Day (Utkala Dibasa)" },
         { month: 4, day: 2, event: "World Autism Awareness Day" },
         { month: 4, day: 5, event: "National Maritime Day (India)" },
         { month: 4, day: 7, event: "World Health Day" },
         { month: 4, day: 10, event: "World Homoeopathy Day" },
-        { month: 4, day: 14, event: "B.R. Ambedkar Remembrance Day (Ambedkar Jayanti)" },
+        { month: 4, day: 14, event: "Dr. B.R. Ambedkar Remembrance Day (Ambedkar Jayanti)" },
         { month: 4, day: 17, event: "World Haemophilia Day" },
         { month: 4, day: 18, event: "World Heritage Day" },
         { month: 4, day: 21, event: "Civil Services Day (India)" },
