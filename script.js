@@ -1,26 +1,33 @@
-// script.js - All JavaScript functionality
+// script.js - Mobile App Version with Auto-Update
 
 (function() {
-    // --------------------------------------------------------------
-    // 📌 IMPORTANT DAYS DATASET with MULTIPLE events on same date
-    // --------------------------------------------------------------
+    'use strict';
+    
+    console.log('📱 Mobile App Initialized:', new Date().toLocaleString());
+    
+    // ========== AUTO-UPDATE CONFIGURATION ==========
+    const APP_VERSION = '2.0.0';
+    const UPDATE_INTERVAL = 5 * 60 * 1000; // 5 minutes (for testing)
+    // const UPDATE_INTERVAL = 30 * 60 * 1000; // 30 minutes (production)
+    
+    // ========== IMPORTANT DAYS DATASET ==========
     const importantDays = [
-        // JANUARY - Multiple events on same day
+        // JANUARY
         { month: 1, day: 1, event: "Global Family Day" },
-        { month: 1, day: 1, event: "New Year's Day" },                          // ✅ second event
+        { month: 1, day: 1, event: "New Year's Day" },
         { month: 1, day: 4, event: "World Braille Day" },
         { month: 1, day: 11, event: "National Human Trafficking Awareness Day (US)" },
-        { month: 1, day: 11, event: "Death anniversary of Lal Bahadur Shastri" }, // ✅ second event
+        { month: 1, day: 11, event: "Death anniversary of Lal Bahadur Shastri" },
         { month: 1, day: 12, event: "National Youth Day (Birthday of Swami Vivekananda)" },
         { month: 1, day: 15, event: "Army Day (India)" },
         { month: 1, day: 24, event: "National Girl Child Day (India)" },
         { month: 1, day: 25, event: "National Tourism Day (India)" },
-        { month: 1, day: 25, event: "National Voters' Day (India)" },            // ✅ second event
+        { month: 1, day: 25, event: "National Voters' Day (India)" },
         { month: 1, day: 26, event: "Republic Day (India)" },
-        { month: 1, day: 26, event: "International Customs Day" },               // ✅ second event
-        { month: 1, day: 26, event: "Beating Retreat rehearsal starts" },        // ✅ third event
+        { month: 1, day: 26, event: "International Customs Day" },
+        { month: 1, day: 26, event: "Beating Retreat rehearsal starts" },
         { month: 1, day: 30, event: "Martyrs' Day (Mahatma Gandhi's Death Anniversary)" },
-        { month: 1, day: 30, event: "World Leprosy Eradication Day" },           // ✅ second event
+        { month: 1, day: 30, event: "World Leprosy Eradication Day" },
         
         // FEBRUARY
         { month: 2, day: 4, event: "World Cancer Day" },
@@ -29,34 +36,33 @@
         { month: 2, day: 11, event: "International Day of Women and Girls in Science" },
         { month: 2, day: 13, event: "World Radio Day" },
         { month: 2, day: 14, event: "Valentine's Day" },
-        { month: 2, day: 14, event: "International Book Giving Day" },           // ✅ second event
+        { month: 2, day: 14, event: "International Book Giving Day" },
         { month: 2, day: 20, event: "World Day of Social Justice" },
         { month: 2, day: 21, event: "International Mother Language Day" },
         { month: 2, day: 28, event: "National Science Day (India)" },
         
-        // MARCH - Multiple events
+        // MARCH
         { month: 3, day: 3, event: "World Wildlife Day" },
-        { month: 3, day: 3, event: "World Hearing Day" },                        // ✅ second event
+        { month: 3, day: 3, event: "World Hearing Day" },
         { month: 3, day: 4, event: "National Safety Day (India)" },
         { month: 3, day: 8, event: "International Women's Day" },
         { month: 3, day: 9, event: "CISF Raising Day (India)" },
         { month: 3, day: 15, event: "World Consumer Rights Day" },
-        { month: 3, day: 15, event: "International Day Against Police Brutality" }, // ✅ second event
-        { month: 3, day: 15, event: "Bhakt Mata Karma Jayanti" },                  // ✅ third event
-{ month: 3, day: 16, event: "First day of Visiting" },
+        { month: 3, day: 15, event: "International Day Against Police Brutality" },
+        { month: 3, day: 15, event: "World Sleep Day (2024)" },
         { month: 3, day: 18, event: "Ordnance Factories Day (India)" },
         { month: 3, day: 20, event: "International Day of Happiness" },
         { month: 3, day: 21, event: "World Forestry Day" },
-        { month: 3, day: 21, event: "World Down Syndrome Day" },                 // ✅ second event
-        { month: 3, day: 21, event: "World Poetry Day" },                        // ✅ third event
+        { month: 3, day: 21, event: "World Down Syndrome Day" },
+        { month: 3, day: 21, event: "World Poetry Day" },
         { month: 3, day: 22, event: "World Water Day" },
         { month: 3, day: 23, event: "World Meteorological Day" },
-        { month: 3, day: 23, event: "Shaheed Diwas (Bhagat Singh, Rajguru, Sukhdev)" }, // ✅ second event
+        { month: 3, day: 23, event: "Shaheed Diwas (Bhagat Singh, Rajguru, Sukhdev)" },
         { month: 3, day: 24, event: "World Tuberculosis (TB) Day" },
         
         // APRIL
         { month: 4, day: 1, event: "April Fools' Day" },
-        { month: 4, day: 1, event: "Odisha Foundation Day (Utkala Dibasa)" },    // ✅ second event
+        { month: 4, day: 1, event: "Odisha Foundation Day (Utkala Dibasa)" },
         { month: 4, day: 2, event: "World Autism Awareness Day" },
         { month: 4, day: 5, event: "National Maritime Day (India)" },
         { month: 4, day: 7, event: "World Health Day" },
@@ -71,25 +77,25 @@
         { month: 4, day: 25, event: "World Malaria Day" },
         { month: 4, day: 26, event: "World Intellectual Property Day" },
         
-        // MAY - Multiple events
+        // MAY
         { month: 5, day: 1, event: "International Labour Day" },
-        { month: 5, day: 1, event: "Maharashtra Day" },                          // ✅ second event
-        { month: 5, day: 1, event: "Gujarat Day" },                              // ✅ third event
+        { month: 5, day: 1, event: "Maharashtra Day" },
+        { month: 5, day: 1, event: "Gujarat Day" },
         { month: 5, day: 3, event: "Press Freedom Day" },
-        { month: 5, day: 3, event: "World Asthma Day" },                         // ✅ second event
+        { month: 5, day: 3, event: "World Asthma Day" },
         { month: 5, day: 4, event: "Coal Miners Day" },
         { month: 5, day: 8, event: "World Red Cross Day" },
         { month: 5, day: 11, event: "National Technology Day (India)" },
         { month: 5, day: 12, event: "International Nurses Day" },
         { month: 5, day: 15, event: "International Day of Families" },
         { month: 5, day: 17, event: "World Telecommunication Day" },
-        { month: 5, day: 17, event: "World Hypertension Day" },                  // ✅ second event
+        { month: 5, day: 17, event: "World Hypertension Day" },
         { month: 5, day: 20, event: "National Anti-Terrorism Day (India)" },
         { month: 5, day: 21, event: "National Anti-Terrorism Day (India)" },
-        { month: 5, day: 21, event: "Armed Forces Day (US)" },                   // ✅ second event
+        { month: 5, day: 21, event: "Armed Forces Day (US)" },
         { month: 5, day: 22, event: "International Day for Biological Diversity" },
         { month: 5, day: 31, event: "World No Tobacco Day" },
-        { month: 5, day: 31, event: "National Memorial Day (US)" },              // ✅ second event
+        { month: 5, day: 31, event: "National Memorial Day (US)" },
         
         // JUNE
         { month: 6, day: 1, event: "Global Day of Parents" },
@@ -97,7 +103,7 @@
         { month: 6, day: 5, event: "World Environment Day" },
         { month: 6, day: 7, event: "World Food Safety Day" },
         { month: 6, day: 8, event: "World Brain Tumor Day" },
-        { month: 6, day: 8, event: "World Oceans Day" },                         // ✅ second event
+        { month: 6, day: 8, event: "World Oceans Day" },
         { month: 6, day: 12, event: "World Day Against Child Labour" },
         { month: 6, day: 14, event: "World Blood Donor Day" },
         { month: 6, day: 15, event: "World Elder Abuse Awareness Day" },
@@ -107,20 +113,20 @@
         { month: 6, day: 19, event: "World Sickle Cell Awareness Day" },
         { month: 6, day: 20, event: "World Refugee Day" },
         { month: 6, day: 21, event: "International Day of Yoga" },
-        { month: 6, day: 21, event: "World Music Day" },                         // ✅ second event
+        { month: 6, day: 21, event: "World Music Day" },
         { month: 6, day: 23, event: "International Olympic Day" },
-        { month: 6, day: 23, event: "United Nations Public Service Day" },       // ✅ second event
+        { month: 6, day: 23, event: "United Nations Public Service Day" },
         { month: 6, day: 26, event: "International Day Against Drug Abuse and Illicit Trafficking" },
         { month: 6, day: 29, event: "National Statistics Day (India)" },
         
         // JULY
         { month: 7, day: 1, event: "National Doctor's Day (India)" },
-        { month: 7, day: 1, event: "Chartered Accountants Day (India)" },        // ✅ second event
+        { month: 7, day: 1, event: "Chartered Accountants Day (India)" },
         { month: 7, day: 2, event: "World UFO Day" },
         { month: 7, day: 6, event: "World Zoonoses Day" },
         { month: 7, day: 11, event: "World Population Day" },
         { month: 7, day: 12, event: "International Day of Combating Sand and Dust Storms" },
-        { month: 7, day: 12, event: "Malala Day" },                              // ✅ second event
+        { month: 7, day: 12, event: "Malala Day" },
         { month: 7, day: 15, event: "World Youth Skills Day" },
         { month: 7, day: 17, event: "International Justice Day" },
         { month: 7, day: 18, event: "Nelson Mandela International Day" },
@@ -136,12 +142,12 @@
         { month: 8, day: 7, event: "National Handloom Day (India)" },
         { month: 8, day: 8, event: "Quit India Movement Day" },
         { month: 8, day: 9, event: "Nagasaki Day" },
-        { month: 8, day: 9, event: "International Day of the World's Indigenous Peoples" }, // ✅ second event
+        { month: 8, day: 9, event: "International Day of the World's Indigenous Peoples" },
         { month: 8, day: 12, event: "International Youth Day" },
         { month: 8, day: 13, event: "International Lefthanders Day" },
         { month: 8, day: 15, event: "Independence Day (India)" },
         { month: 8, day: 19, event: "World Photography Day" },
-        { month: 8, day: 19, event: "World Humanitarian Day" },                  // ✅ second event
+        { month: 8, day: 19, event: "World Humanitarian Day" },
         { month: 8, day: 20, event: "Sadbhavana Diwas (India)" },
         { month: 8, day: 23, event: "International Day for the Remembrance of the Slave Trade and its Abolition" },
         { month: 8, day: 29, event: "National Sports Day (India) (Birthday of Dhyan Chand)" },
@@ -149,17 +155,17 @@
         // SEPTEMBER
         { month: 9, day: 2, event: "World Coconut Day" },
         { month: 9, day: 5, event: "Teachers' Day (India) (Birthday of Dr. S. Radhakrishnan)" },
-        { month: 9, day: 5, event: "International Day of Charity" },             // ✅ second event
+        { month: 9, day: 5, event: "International Day of Charity" },
         { month: 9, day: 7, event: "International Day of Clean Air for Blue Skies" },
         { month: 9, day: 8, event: "International Literacy Day" },
         { month: 9, day: 14, event: "Hindi Diwas (India)" },
         { month: 9, day: 15, event: "International Day of Democracy" },
-        { month: 9, day: 15, event: "Engineer's Day (India)" },                  // ✅ second event
+        { month: 9, day: 15, event: "Engineer's Day (India)" },
         { month: 9, day: 16, event: "World Ozone Day" },
         { month: 9, day: 17, event: "World Patient Safety Day" },
         { month: 9, day: 19, event: "International Talk Like a Pirate Day" },
         { month: 9, day: 21, event: "International Day of Peace" },
-        { month: 9, day: 21, event: "World Alzheimer's Day" },                   // ✅ second event
+        { month: 9, day: 21, event: "World Alzheimer's Day" },
         { month: 9, day: 22, event: "World Rose Day (Cancer Awareness)" },
         { month: 9, day: 23, event: "International Day of Sign Languages" },
         { month: 9, day: 26, event: "World Contraception Day" },
@@ -170,9 +176,9 @@
         
         // OCTOBER
         { month: 10, day: 1, event: "International Day for the Elderly" },
-        { month: 10, day: 1, event: "International Coffee Day" },                // ✅ second event
+        { month: 10, day: 1, event: "International Coffee Day" },
         { month: 10, day: 2, event: "Gandhi Jayanti" },
-        { month: 10, day: 2, event: "International Day of Non-Violence" },       // ✅ second event
+        { month: 10, day: 2, event: "International Day of Non-Violence" },
         { month: 10, day: 3, event: "World Habitat Day" },
         { month: 10, day: 4, event: "World Animal Day" },
         { month: 10, day: 5, event: "World Teachers' Day" },
@@ -183,42 +189,42 @@
         { month: 10, day: 13, event: "International Day for Disaster Reduction" },
         { month: 10, day: 14, event: "World Standards Day" },
         { month: 10, day: 15, event: "Global Handwashing Day" },
-        { month: 10, day: 15, event: "World Students' Day (Dr. A.P.J. Abdul Kalam's Birthday)" }, // ✅ second event
-        { month: 10, day: 15, event: "International Day of Rural Women" },       // ✅ third event
+        { month: 10, day: 15, event: "World Students' Day (Dr. A.P.J. Abdul Kalam's Birthday)" },
+        { month: 10, day: 15, event: "International Day of Rural Women" },
         { month: 10, day: 16, event: "World Food Day" },
         { month: 10, day: 17, event: "International Day for the Eradication of Poverty" },
         { month: 10, day: 20, event: "World Statistics Day (every 5 years)" },
-        { month: 10, day: 20, event: "National Solidarity Day (India)" },        // ✅ second event
+        { month: 10, day: 20, event: "National Solidarity Day (India)" },
         { month: 10, day: 24, event: "United Nations Day" },
-        { month: 10, day: 24, event: "World Development Information Day" },      // ✅ second event
+        { month: 10, day: 24, event: "World Development Information Day" },
         { month: 10, day: 27, event: "World Day for Audiovisual Heritage" },
         { month: 10, day: 30, event: "World Thrift Day" },
         { month: 10, day: 31, event: "National Unity Day (India) (Birthday of Sardar Vallabhbhai Patel)" },
-        { month: 10, day: 31, event: "Halloween" },                               // ✅ second event
+        { month: 10, day: 31, event: "Halloween" },
         
         // NOVEMBER
         { month: 11, day: 1, event: "World Vegan Day" },
-        { month: 11, day: 1, event: "Rajyotsava Day (Karnataka Formation Day)" }, // ✅ second event
+        { month: 11, day: 1, event: "Rajyotsava Day (Karnataka Formation Day)" },
         { month: 11, day: 7, event: "National Cancer Awareness Day (India)" },
-        { month: 11, day: 7, event: "Infant Protection Day" },                    // ✅ second event
+        { month: 11, day: 7, event: "Infant Protection Day" },
         { month: 11, day: 8, event: "World Urbanism Day" },
-        { month: 11, day: 8, event: "International Day of Radiology" },           // ✅ second event
+        { month: 11, day: 8, event: "International Day of Radiology" },
         { month: 11, day: 9, event: "Legal Services Day (India)" },
         { month: 11, day: 10, event: "World Science Day for Peace and Development" },
         { month: 11, day: 11, event: "National Education Day (India)" },
         { month: 11, day: 12, event: "World Pneumonia Day" },
         { month: 11, day: 13, event: "World Kindness Day" },
         { month: 11, day: 14, event: "Children's Day (India) (Birthday of Jawaharlal Nehru)" },
-        { month: 11, day: 14, event: "World Diabetes Day" },                      // ✅ second event
+        { month: 11, day: 14, event: "World Diabetes Day" },
         { month: 11, day: 16, event: "International Day for Tolerance" },
         { month: 11, day: 17, event: "National Epilepsy Day (India)" },
         { month: 11, day: 19, event: "World Toilet Day" },
-        { month: 11, day: 19, event: "International Men's Day" },                 // ✅ second event
+        { month: 11, day: 19, event: "International Men's Day" },
         { month: 11, day: 20, event: "Universal Children's Day" },
-        { month: 11, day: 20, event: "Africa Industrialization Day" },           // ✅ second event
+        { month: 11, day: 20, event: "Africa Industrialization Day" },
         { month: 11, day: 21, event: "World Television Day" },
-        { month: 11, day: 21, event: "World Fisheries Day" },                     // ✅ second event
-        { month: 11, day: 21, event: "World Hello Day" },                         // ✅ third event
+        { month: 11, day: 21, event: "World Fisheries Day" },
+        { month: 11, day: 21, event: "World Hello Day" },
         { month: 11, day: 25, event: "International Day for the Elimination of Violence against Women" },
         { month: 11, day: 26, event: "National Law Day (Constitution Day) (India)" },
         { month: 11, day: 29, event: "International Day of Solidarity with the Palestinian People" },
@@ -226,35 +232,187 @@
         // DECEMBER
         { month: 12, day: 1, event: "World AIDS Day" },
         { month: 12, day: 2, event: "World Computer Literacy Day" },
-        { month: 12, day: 2, event: "International Day for the Abolition of Slavery" }, // ✅ second event
+        { month: 12, day: 2, event: "International Day for the Abolition of Slavery" },
         { month: 12, day: 3, event: "International Day of Persons with Disabilities" },
         { month: 12, day: 4, event: "Indian Navy Day" },
         { month: 12, day: 5, event: "International Volunteer Day" },
-        { month: 12, day: 5, event: "World Soil Day" },                           // ✅ second event
+        { month: 12, day: 5, event: "World Soil Day" },
         { month: 12, day: 7, event: "International Civil Aviation Day" },
-        { month: 12, day: 7, event: "Armed Forces Flag Day (India)" },            // ✅ second event
+        { month: 12, day: 7, event: "Armed Forces Flag Day (India)" },
         { month: 12, day: 9, event: "International Anti-Corruption Day" },
         { month: 12, day: 10, event: "Human Rights Day" },
         { month: 12, day: 11, event: "International Mountain Day" },
-        { month: 12, day: 11, event: "UNICEF Day" },                              // ✅ second event
+        { month: 12, day: 11, event: "UNICEF Day" },
         { month: 12, day: 14, event: "National Energy Conservation Day (India)" },
         { month: 12, day: 16, event: "Vijay Diwas (India)" },
-        { month: 12, day: 16, event: "Day of Reconciliation (South Africa)" },    // ✅ second event
-{ month: 12, day: 18, event: "GURU GHASIDAS JAYANTI" },
+        { month: 12, day: 16, event: "Day of Reconciliation (South Africa)" },
         { month: 12, day: 18, event: "Minorities Rights Day (India)" },
-        { month: 12, day: 18, event: "International Migrants Day" },              // ✅ second event
+        { month: 12, day: 18, event: "International Migrants Day" },
         { month: 12, day: 19, event: "Goa Liberation Day (India)" },
         { month: 12, day: 20, event: "International Human Solidarity Day" },
         { month: 12, day: 22, event: "National Mathematics Day (India) (Birthday of Srinivasa Ramanujan)" },
         { month: 12, day: 23, event: "National Farmers Day (Kisan Diwas) (India)" },
         { month: 12, day: 24, event: "National Consumer Rights Day (India)" },
         { month: 12, day: 25, event: "Christmas Day" },
-        { month: 12, day: 25, event: "Good Governance Day (India)" }              // ✅ second event
+        { month: 12, day: 25, event: "Good Governance Day (India)" }
     ];
 
     const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     
-    // current date (system)
+    // ========== AUTO-UPDATE FUNCTIONS ==========
+    
+    // Force cache clear on app start
+    function clearAllCaches() {
+        console.log('🧹 Clearing all caches...');
+        
+        // Clear browser cache storage
+        if ('caches' in window) {
+            caches.keys().then(keys => {
+                keys.forEach(key => {
+                    caches.delete(key);
+                    console.log('   ✓ Deleted:', key);
+                });
+            });
+        }
+        
+        // Clear storages
+        sessionStorage.clear();
+        
+        // Clear specific app data
+        const keysToRemove = ['lastUpdate', 'cachedEvents', 'lastVisitDate'];
+        keysToRemove.forEach(key => localStorage.removeItem(key));
+        
+        // Clear service worker caches
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                registrations.forEach(reg => reg.unregister());
+            });
+        }
+    }
+    
+    // Check if date changed
+    function isNewDay() {
+        const lastVisit = localStorage.getItem('lastVisitDate');
+        const today = new Date().toDateString();
+        return lastVisit !== today;
+    }
+    
+    // Update last visit date
+    function updateLastVisit() {
+        localStorage.setItem('lastVisitDate', new Date().toDateString());
+    }
+    
+    // Show last update time
+    function updateTimestamp() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+        
+        const updateEl = document.getElementById('updateTimeDisplay');
+        if (updateEl) {
+            updateEl.innerHTML = `⏰ Last update: ${timeStr}`;
+        }
+        
+        // Also update version info
+        const versionEl = document.getElementById('versionInfo');
+        if (versionEl) {
+            versionEl.innerHTML = `App v${APP_VERSION} · ${now.toLocaleDateString()}`;
+        }
+    }
+    
+    // Pull to refresh simulation
+    let touchStart = 0;
+    function setupPullToRefresh() {
+        const ptrIndicator = document.getElementById('ptrIndicator');
+        let pulling = false;
+        
+        document.addEventListener('touchstart', (e) => {
+            if (window.scrollY === 0) {
+                touchStart = e.touches[0].clientY;
+                pulling = true;
+            }
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (!pulling) return;
+            const touchY = e.touches[0].clientY;
+            const diff = touchY - touchStart;
+            
+            if (diff > 60 && window.scrollY === 0) {
+                ptrIndicator.classList.add('show');
+            }
+        });
+        
+        document.addEventListener('touchend', () => {
+            if (ptrIndicator.classList.contains('show')) {
+                ptrIndicator.classList.remove('show');
+                refreshApp();
+            }
+            pulling = false;
+        });
+    }
+    
+    // Main refresh function
+    function refreshApp() {
+        console.log('🔄 Refreshing app data...');
+        
+        // Clear caches
+        clearAllCaches();
+        
+        // Update timestamp
+        updateTimestamp();
+        
+        // Reload current date events
+        renderMainForDate(currentMonth, currentDay);
+        
+        // Show refresh status
+        const statusEl = document.getElementById('refreshStatus');
+        if (statusEl) {
+            statusEl.innerHTML = '✓ Updated just now';
+            statusEl.style.color = '#4CAF50';
+            setTimeout(() => {
+                statusEl.innerHTML = '';
+            }, 3000);
+        }
+    }
+    
+    // Check for updates periodically
+    function startAutoUpdate() {
+        // Check every 5 minutes (adjust as needed)
+        setInterval(() => {
+            console.log('⏰ Auto-update check at:', new Date().toLocaleTimeString());
+            
+            if (isNewDay()) {
+                console.log('📅 New day detected! Refreshing...');
+                refreshApp();
+                updateLastVisit();
+            } else {
+                // Still refresh data every interval
+                renderMainForDate(currentMonth, currentDay);
+                updateTimestamp();
+            }
+        }, UPDATE_INTERVAL);
+        
+        // Also check when app becomes active
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                console.log('👁️ App became active');
+                if (isNewDay()) {
+                    refreshApp();
+                    updateLastVisit();
+                } else {
+                    renderMainForDate(currentMonth, currentDay);
+                    updateTimestamp();
+                }
+            }
+        });
+    }
+    
+    // ========== UI RENDERING FUNCTIONS ==========
+    
     const today = new Date();
     let currentMonth = today.getMonth() + 1;
     let currentDay = today.getDate();
@@ -280,12 +438,10 @@
     let selectedMonth = currentMonth;
     let selectedDay = currentDay;
 
-    // ---- render main card based on (month, day) ----
     function renderMainForDate(month, day) {
         const filtered = importantDays.filter(item => item.month === month && item.day === day);
         const monthName = monthNames[month-1];
 
-        // update header / chips
         currentDateDisplay.innerHTML = `${day} <small>${monthName.substring(0,3).toUpperCase()}</small>`;
         todayGreeting.innerHTML = `🔔 ${day} ${monthName} special notifications`;
         footerDate.innerHTML = `showing events for <strong>${monthName} ${day}</strong>`;
@@ -312,9 +468,10 @@
             eventsContainer.innerHTML = cards;
             eventCountBadge.innerText = `${filtered.length} event${filtered.length > 1 ? 's' : ''}`;
         }
+        
+        updateTimestamp();
     }
 
-    // ---- build month grid inside drawer ----
     function buildMonthGrid() {
         monthGrid.innerHTML = '';
         monthNames.forEach((name, idx) => {
@@ -334,9 +491,7 @@
         });
     }
 
-    // ---- build day chips for given month ----
     function buildDayChips(month) {
-        // get all days that exist in dataset for this month (unique)
         const daysInMonth = [...new Set(importantDays.filter(item => item.month === month).map(item => item.day))].sort((a,b) => a-b);
         dayChipsContainer.innerHTML = '';
         if (daysInMonth.length === 0) {
@@ -356,7 +511,6 @@
         });
     }
 
-    // ---- open drawer & sync ----
     function openDrawer() {
         selectedMonth = currentMonth;
         selectedDay = currentDay;
@@ -379,7 +533,8 @@
         overlay.classList.remove('active');
     }
 
-    // ---- jump button: update main view ----
+    // ========== EVENT LISTENERS ==========
+    
     jumpBtn.addEventListener('click', () => {
         currentMonth = selectedMonth;
         currentDay = selectedDay;
@@ -387,37 +542,40 @@
         closeDrawerFunc();
     });
 
-    // ---- dark mode toggle ----
     darkToggle.addEventListener('click', () => {
         bodyEl.classList.toggle('dark');
         darkToggle.innerText = bodyEl.classList.contains('dark') ? '☀️' : '🌙';
     });
 
-    // ---- menu open/close ----
     menuToggle.addEventListener('click', openDrawer);
     closeDrawer.addEventListener('click', closeDrawerFunc);
     overlay.addEventListener('click', closeDrawerFunc);
 
-    // ---- initial render with today ----
-    renderMainForDate(currentMonth, currentDay);
-
-    // ---- ensure drawer starts closed ----
-    closeDrawerFunc();
-})();
-// script.js - All JavaScript functionality
-
-// 🔥 Cache check - Ensure fresh start each day
-(function() {
-    const lastVisit = localStorage.getItem('lastVisit');
-    const today = new Date().toDateString();
+    // ========== INITIALIZATION ==========
     
-    if (lastVisit !== today) {
-        console.log('New day! Loading fresh data for', today);
-        localStorage.setItem('lastVisit', today);
-        // Optional: Clear any cached data
-        sessionStorage.clear();
+    // Clear caches on start
+    clearAllCaches();
+    
+    // Check if new day
+    if (isNewDay()) {
+        console.log('✨ New day! Fresh data loaded');
+        updateLastVisit();
     }
+    
+    // Initial render
+    renderMainForDate(currentMonth, currentDay);
+    
+    // Setup auto-update
+    startAutoUpdate();
+    
+    // Setup pull to refresh
+    setupPullToRefresh();
+    
+    // Update timestamp immediately
+    updateTimestamp();
+    
+    // Close drawer initially
+    closeDrawerFunc();
+    
+    console.log('✅ App ready. Version:', APP_VERSION);
 })();
-
-// Rest of your existing script.js code (jo maine pehle diya tha)
-// ... (poora previous script.js code yahi paste karo)
