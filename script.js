@@ -247,6 +247,7 @@
         { month: 12, day: 14, event: "National Energy Conservation Day (India)" },
         { month: 12, day: 16, event: "Vijay Diwas (India)" },
         { month: 12, day: 16, event: "Day of Reconciliation (South Africa)" },
+{ month: 12, day: 18, event: "GURU GHASIDAS JAYANTI" },
         { month: 12, day: 18, event: "Minorities Rights Day (India)" },
         { month: 12, day: 18, event: "International Migrants Day" },
         { month: 12, day: 19, event: "Goa Liberation Day (India)" },
