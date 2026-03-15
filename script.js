@@ -15,7 +15,6 @@
         // JANUARY
 { month: 1, day: 1, event: "Happy New Year" },
         { month: 1, day: 1, event: "Global Family Day" },
-        { month: 1, day: 1, event: "New Year's Day" },
         { month: 1, day: 4, event: "World Braille Day" },
         { month: 1, day: 11, event: "National Human Trafficking Awareness Day (US)" },
         { month: 1, day: 11, event: "Death anniversary of Lal Bahadur Shastri" },
