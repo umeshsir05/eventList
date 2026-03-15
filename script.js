@@ -42,7 +42,7 @@
         { month: 3, day: 9, event: "CISF Raising Day (India)" },
         { month: 3, day: 15, event: "World Consumer Rights Day" },
         { month: 3, day: 15, event: "International Day Against Police Brutality" }, // ✅ second event
-        { month: 3, day: 15, event: "World Sleep Day (2024)" },                  // ✅ third event
+        { month: 3, day: 15, event: "Bhakt Mata Karma Jayanti" },                  // ✅ third event
         { month: 3, day: 18, event: "Ordnance Factories Day (India)" },
         { month: 3, day: 20, event: "International Day of Happiness" },
         { month: 3, day: 21, event: "World Forestry Day" },
