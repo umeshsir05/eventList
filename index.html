@@ -2,19 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- 🔥 Cache control meta tags -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <!-- ========== 🔥 CACHE CONTROL - EXTREME ========== -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0, pre-check=0, post-check=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Clear-Site-Data" content="*">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <title>🔔 today's days</title>
+    <!-- ========== 📱 MOBILE APP SPECIFIC ========== -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Important Days">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1e3c5c">
     
-    <!-- CSS with version - change version when you update -->
-    <link rel="stylesheet" href="style.css?v=1.0.1">
+    <!-- For Android -->
+    <meta name="color-scheme" content="dark light">
+    
+    <title>📅 Important Days · Mobile App</title>
+    
+    <!-- CSS with timestamp -->
+    <link rel="stylesheet" href="style.css?v=2.0.0">
+    
+    <style>
+        /* Pull to refresh indicator */
+        .ptr-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--accent-gold);
+            color: #1e2b4f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-100%);
+            transition: transform 0.2s;
+            z-index: 1000;
+            font-weight: 600;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .ptr-overlay.show {
+            transform: translateY(0);
+        }
+        
+        .offline-banner {
+            background: #f94144;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 0;
+            display: none;
+            margin-bottom: 10px;
+        }
+        
+        .offline-banner.show {
+            display: block;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .version-info {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body class="dark">
+    <!-- Pull to refresh indicator -->
+    <div class="ptr-overlay" id="ptrIndicator">
+        <span class="loading-spinner"></span> Refreshing...
+    </div>
+    
+    <!-- Offline banner -->
+    <div class="offline-banner" id="offlineBanner">
+        📴 You are offline · Showing last updated data
+    </div>
+    
     <!-- top bar with menu + dark toggle -->
     <div class="top-bar">
         <div class="menu-btn" id="menuToggle">
@@ -22,6 +108,9 @@
         </div>
         <div class="dark-toggle" id="darkToggle">🌙</div>
     </div>
+    
+    <!-- Refresh indicator -->
+    <div style="text-align: center; padding: 5px;" id="refreshStatus"></div>
 
     <!-- main card -->
     <div class="notification-container" id="mainCard">
@@ -42,8 +131,10 @@
         <div class="footer-note" id="footerDate">
             showing events for <strong>March 15</strong>
         </div>
-        <div class="reminder-bell">
-            🔔 daily notification · exact date match
+        
+        <!-- Last update time -->
+        <div class="reminder-bell" style="justify-content: center; margin-top: 15px;" id="updateTimeDisplay">
+            ⏰ Last update: Just now
         </div>
     </div>
 
@@ -61,8 +152,55 @@
         </div>
         <button class="goto-btn" id="jumpToDateBtn">🔔 show events</button>
     </div>
+    
+    <!-- Version info -->
+    <div class="version-info" id="versionInfo">
+        App v2.0.0
+    </div>
 
-    <!-- JavaScript with version -->
-    <script src="script.js?v=1.0.1"></script>
+    <!-- ========== 📱 MOBILE APP AUTO-UPDATE SCRIPT ========== -->
+    <script src="script.js?v=2.0.0"></script>
+    
+    <!-- Service Worker for offline cache management -->
+    <script>
+        // Extreme cache clear on app start
+        (function mobileAppInit() {
+            console.log('📱 Mobile App Started:', new Date().toLocaleString());
+            
+            // Clear everything
+            if ('caches' in window) {
+                caches.keys().then(keys => {
+                    keys.forEach(key => {
+                        caches.delete(key);
+                        console.log('🗑️ Deleted cache:', key);
+                    });
+                });
+            }
+            
+            // Clear storages
+            sessionStorage.clear();
+            localStorage.removeItem('lastUpdate');
+            localStorage.removeItem('cachedEvents');
+            
+            // Show last update
+            const updateTime = new Date().toLocaleTimeString();
+            document.getElementById('updateTimeDisplay').innerHTML = 
+                `⏰ Last update: ${updateTime}`;
+            
+            // Check network status
+            function updateOnlineStatus() {
+                const banner = document.getElementById('offlineBanner');
+                if (navigator.onLine) {
+                    banner.classList.remove('show');
+                } else {
+                    banner.classList.add('show');
+                }
+            }
+            
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+            updateOnlineStatus();
+        })();
+    </script>
 </body>
 </html>
