@@ -64,7 +64,7 @@
         
         // 15 March
         { month: 3, day: 15, event: "World Consumer Rights Day (विश्व)" },
-        
+         { month: 3, day: 15, event: "Bhakt Mata Karma Jayanti" },
         // 21 March
         { month: 3, day: 21, event: "International Day of Forests (विश्व)" },
         
