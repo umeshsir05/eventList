@@ -546,3 +546,50 @@
     console.log('✅ App ready. Version:', APP_VERSION);
     console.log('📊 Total Important Days:', importantDays.length);
 })();
+
+
+// Agar app WebView mein convert kiya hai to:
+function sendLocalNotification(title, message) {
+    // Android bridge
+    if (window.Android) {
+        Android.showNotification(title, message);
+    }
+    // iOS bridge
+    if (window.webkit && window.webkit.messageHandlers) {
+        window.webkit.messageHandlers.notification.postMessage({
+            title: title,
+            message: message
+        });
+    }
+}
+
+// Daily check
+function checkForNotification() {
+    const now = new Date();
+    const events = importantDays.filter(d => 
+        d.month === now.getMonth() + 1 && 
+        d.day === now.getDate()
+    );
+    
+    if (events.length > 0) {
+        sendLocalNotification(
+            "📅 Today's Important Days",
+            `${events.length} event${events.length > 1 ? 's' : ''} today!`
+        );
+    }
+}
+
+// Check at 8 AM
+const now = new Date();
+const eightAM = new Date(now);
+eightAM.setHours(8, 0, 0, 0);
+
+if (now > eightAM) {
+    eightAM.setDate(eightAM.getDate() + 1);
+}
+
+const timeUntilEight = eightAM - now;
+setTimeout(() => {
+    checkForNotification();
+    setInterval(checkForNotification, 24 * 60 * 60 * 1000);
+}, timeUntilEight);
