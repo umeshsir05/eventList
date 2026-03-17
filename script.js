@@ -593,3 +593,26 @@ setTimeout(() => {
     checkForNotification();
     setInterval(checkForNotification, 24 * 60 * 60 * 1000);
 }, timeUntilEight);
+
+
+// Add to script.js
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            console.log('ServiceWorker registered');
+            
+            // Request notification permission
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    console.log('Notification permission granted');
+                    
+                    // Subscribe to push
+                    registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: 'YOUR_PUBLIC_KEY'
+                    });
+                }
+            });
+        });
+    });
+}
