@@ -78,7 +78,10 @@
         
         // 23 March
         { month: 3, day: 23, event: "Shaheed Diwas - Bhagat Singh, Rajguru, Sukhdev (भारत)" },
-        
+
+  // 26 March
+        { month: 3, day: 26, event: "Ram Navami (भारत)" },   
+   { month: 3, day: 27, event: "Ram Navami (भारत)" },
         
         // ========== APRIL ==========
         // 7 April
