@@ -86,7 +86,11 @@
 { month: 3, day: 31, event: "Mahaveer Jayanti (भारत)" },
         
         // ========== APRIL ==========
-        // 7 April
+    // 3 April    
+{ month: 4, day: 3, event: "Good Friday (विश्व)" },
+// 5 April  
+{ month: 4, day: 5, event: "Easter day(विश्व)" },
+// 7 April
         { month: 4, day: 7, event: "World Health Day (विश्व)" },
         
         // 14 April
