@@ -82,6 +82,8 @@
   // 26 March
         { month: 3, day: 26, event: "Ram Navami (भारत)" },   
    { month: 3, day: 27, event: "Ram Navami (भारत)" },
+// 31 March
+{ month: 3, day: 31, event: "Mahaveer Jayanti (भारत)" },
         
         // ========== APRIL ==========
         // 7 April
