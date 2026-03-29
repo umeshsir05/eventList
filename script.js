@@ -141,7 +141,9 @@
         
         // 23 June
         { month: 6, day: 23, event: "United Nations Public Service Day (विश्व)" },
-        
+
+   // 26 June
+        { month: 6, day: 23, event: "Muharram /Ashura(Tentative )" },     
         
         // ========== JULY ==========
         // 1 July
