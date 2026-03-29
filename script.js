@@ -175,7 +175,9 @@
         
         
         // ========== SEPTEMBER ==========
-        // 5 September
+        // 4 September
+        { month: 9, day: 4, event: "Janmashtami (भारत)" },
+     // 5 September
         { month: 9, day: 5, event: "Teachers' Day (भारत)" },
         
         // 8 September
@@ -183,7 +185,9 @@
         
         // 14 September
         { month: 9, day: 14, event: "Hindi Diwas (भारत)" },
-        
+
+      // 14 September
+        { month: 9, day: 14, event: "Ganesh Chaturthi (भारत)" },  
         // 16 September
         { month: 9, day: 16, event: "World Ozone Day (विश्व)" },
         
@@ -203,7 +207,14 @@
         
         // 16 October
         { month: 10, day: 16, event: "World Food Day (विश्व)" },
-        
+        // 17 October
+        { month: 10, day: 17, event: "First day of Durga puja" },
+// 18 October
+        { month: 10, day: 18, event: "Maha Saptami" },
+// 19 October
+        { month: 10, day: 19, event: "Maha Ashtami" },
+// 20 October
+        { month: 10, day: 20, event: "Dassehra" },
         // 31 October
         { month: 10, day: 31, event: "National Unity Day - Sardar Patel (भारत)" },
         
