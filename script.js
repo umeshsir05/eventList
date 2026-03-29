@@ -225,13 +225,18 @@
         
         // 7 November
         { month: 11, day: 7, event: "National Cancer Awareness Day (भारत)" },
-        
+        // 8 November
+        { month: 11, day: 8, event: "Narak Chaturdashi/diwali (भारत)" },
+// 9 November
+        { month: 11, day: 9, event: "Gowardhan puja (भारत)" },
         // 11 November
         { month: 11, day: 11, event: "National Education Day (भारत)" },
-        
+        // 11 November
+        { month: 11, day: 11, event: "Bhai Dooj(भारत)" },
         // 14 November
         { month: 11, day: 14, event: "Children's Day - Jawaharlal Nehru (भारत)" },
-        
+        // 15 November
+        { month: 11, day: 11, event: "Chhat puja (भारत)" },
         // 19 November
         { month: 11, day: 19, event: "World Toilet Day (विश्व)" },
         
