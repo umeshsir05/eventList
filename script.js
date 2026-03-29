@@ -151,7 +151,8 @@
         
         // 11 July
         { month: 7, day: 11, event: "World Population Day (विश्व)" },
-        
+      //16 July 
+        { month: 7, day: 16, event: "Rath Yatra " },
         // 26 July
         { month: 7, day: 26, event: "Kargil Vijay Diwas (भारत)" },
         
