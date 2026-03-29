@@ -95,7 +95,8 @@
         
         // 14 April
         { month: 4, day: 14, event: "Dr. B. R. Ambedkar Jayanti (भारत)" },
-        
+
+        { month: 4, day: 14, event: "Baishakhi (भारत)" },
         // 18 April
         { month: 4, day: 18, event: "World Heritage Day (विश्व)" },
         
