@@ -86,7 +86,9 @@
 { month: 3, day: 31, event: "Mahaveer Jayanti (भारत)" },
         
         // ========== APRIL ==========
-    // 3 April    
+    // 1 April    
+{ month: 4, day: 1, event: "RBI foundation day " },
+// 3 April    
 { month: 4, day: 3, event: "Good Friday (विश्व)" },
 // 5 April  
 { month: 4, day: 5, event: "Easter day(विश्व)" },
