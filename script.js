@@ -88,6 +88,8 @@
         // ========== APRIL ==========
     // 1 April    
 { month: 4, day: 1, event: "RBI foundation day " },
+// 2 April    
+{ month: 4, day: 1, event: "Hanuman Janmotsav " },
 // 3 April    
 { month: 4, day: 3, event: "Good Friday (विश्व)" },
 // 5 April  
