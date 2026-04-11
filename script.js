@@ -96,7 +96,9 @@
 { month: 4, day: 5, event: "Easter day(विश्व)" },
 // 7 April
         { month: 4, day: 7, event: "World Health Day (विश्व)" },
-        
+
+ // 11 April
+        { month: 4, day: 11, event: "Mahatma Jyotiba Phule Jayanti" },       
         // 14 April
         { month: 4, day: 14, event: "Dr. B. R. Ambedkar Jayanti (भारत)" },
 
