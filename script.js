@@ -105,6 +105,8 @@
         { month: 4, day: 14, event: "Baishakhi (भारत)" },
         // 18 April
         { month: 4, day: 18, event: "World Heritage Day (विश्व)" },
+           // 19 April
+        { month: 4, day: 19, event: "Parshuram Jayanti" },
         
         // 22 April
         { month: 4, day: 22, event: "Earth Day (विश्व)" },
