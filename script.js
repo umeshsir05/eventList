@@ -127,9 +127,12 @@
 
         // 9 May
         { month: 5, day: 9, event: "Rabindranath Tagore Jayanti " },
+// 10 May
+        { month: 5, day: 10, event: "Mother's Day (भारत)" },
+       
         // 11 May
         { month: 5, day: 11, event: "National Technology Day (भारत)" },
-        
+ 
         // 15 May
         { month: 5, day: 15, event: "International Day of Families (विश्व)" },
         
