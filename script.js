@@ -122,9 +122,11 @@
         // 3 May
         { month: 5, day: 3, event: "World Press Freedom Day (विश्व)" },
         
-        // 8 May
-        { month: 5, day: 8, event: "World Red Cross Day (विश्व)" },
+        // 7 May
+        { month: 5, day: 7, event: "Ravindra nath tagore jayanti" },
 
+// 8 May
+        { month: 5, day: 8, event: "World Red Cross Day (विश्व)" },
         // 9 May
         { month: 5, day: 9, event: "Rabindranath Tagore Jayanti " },
 // 10 May
